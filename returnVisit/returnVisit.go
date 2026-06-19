@@ -231,3 +231,4 @@ func UpdateUser(db *sql.DB) {
 	}
 	fmt.Println("Return Visit Updated Successfully!")
 }
+	
