@@ -75,6 +75,7 @@ func returnVisitMenu(db *sql.DB) {
 
 		case "4":
 			returnVisit.Display(db)
+			fmt.Println()
 			returnVisit.UpdateUser(db)
 
 		case "5":
@@ -98,7 +99,7 @@ func bibleStudyMenu(db *sql.DB){
 	fmt.Println()
 	fmt.Println("\t*****____OPTIONS____*****")
 	fmt.Println()
-	fmt.Println("Choice 1. add Bible Study\nChoice 2. Display Bible Study\nchoice 3. Exit")
+	fmt.Println("Choice 1. add Bible Study\nChoice 2. Display Bible Study\nchoice3. Update Bible Study\nchoice 4. Delete Bible Study\nChoice 5. Filter Bible Study By Name Or Street\nChoice 6. Exit")
 	choice := stdInput.GetInput(reader, "\nEnter Bible Study Choice: ")
 	fmt.Println()
 	switch choice{
@@ -106,7 +107,17 @@ func bibleStudyMenu(db *sql.DB){
 		bibleStudy.CreateBibleStudy(db)
 		case "2":
 		bibleStudy.DisplayBibleStudy(db)
-        case "3":
+		case "3":
+		bibleStudy.DisplayBibleStudy(db)
+		fmt.Println()
+		bibleStudy.UpdateBibleStudy(db)
+		case "4":
+		bibleStudy.DisplayBibleStudy(db)
+	    id := stdInput.GetInput(reader, "\nEnter Delete ID: ")
+		bibleStudy.DeleteBibleStudy(db,id)
+		case "5":
+		bibleStudy.FilterBibleStudyByFields(db)
+        case "6":
 		return
 		default:
 		fmt.Println("Invalid Input")
