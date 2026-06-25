@@ -22,7 +22,7 @@ type BibleStudy struct{
     QuestionAsked string
 }
 
-func CreateBibleStudy(db *sql.DB){
+func CreateBibleStudy() BibleStudy{
     reader := bufio.NewReader(os.Stdin)
     b := BibleStudy{
         Name: stdInput.GetInput(reader, "Enter Name: "),
@@ -35,7 +35,9 @@ func CreateBibleStudy(db *sql.DB){
         Next_appointment: stdInput.GetInput(reader, "Enter Next Appointment Date: "),
         QuestionAsked: stdInput.GetInput(reader, "Enter Question Asked: "),
     }
-
+	return b
+}
+func SaveBibleStudy(db *sql.DB, b BibleStudy){
     query := `CREATE TABLE IF NOT EXISTS bible_study(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
@@ -117,6 +119,7 @@ func printRows(rows *sql.Rows) {
 	}
 }
 
+
 func UpdateBibleStudy(db *sql.DB){
     var id int
 	fmt.Print("Enter ID to Update: ")
@@ -174,7 +177,7 @@ func UpdateBibleStudy(db *sql.DB){
 		return
 	}
 	fmt.Println("Bible Study Updated Successfully!")
-
+    
 }
 
 

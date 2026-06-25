@@ -20,13 +20,15 @@ type ReturnVisit struct {
 	Others         string
 }
 
-func UserInput(db *sql.DB) {
+func UserInput()ReturnVisit {
 	reader := bufio.NewReader(os.Stdin)
 	name := stdInput.GetInput(reader, "Enter Return Visit Name: ")
 	if name == "" {
 		fmt.Println("\U0001F6D1")
 		fmt.Println("Please! Enter Return Visit Name")
-		return
+		return ReturnVisit{
+            Name: name,
+        }
 	}
 	user := ReturnVisit{
 		Name:           name,
@@ -37,7 +39,9 @@ func UserInput(db *sql.DB) {
 		LandMark:       stdInput.GetInput(reader, "Enter land mark: "),
 		Others:         stdInput.GetInput(reader, "Enter others: "),
 	}
-
+    return user
+}
+func Save(db *sql.DB, user ReturnVisit){
 	createTableQuery := `CREATE TABLE IF NOT EXISTS return_visit (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL,

@@ -64,7 +64,8 @@ func returnVisitMenu(db *sql.DB) {
 		switch option {
 
 		case "1":
-			returnVisit.UserInput(db)
+			inputData := returnVisit.UserInput()
+			returnVisit.Save(db,inputData)
 
 		case "2":
 			returnVisit.Display(db)
@@ -104,7 +105,8 @@ func bibleStudyMenu(db *sql.DB){
 	fmt.Println()
 	switch choice{
 		case "1":
-		bibleStudy.CreateBibleStudy(db)
+		bStudy := bibleStudy.CreateBibleStudy()
+		bibleStudy.SaveBibleStudy(db, bStudy)
 		case "2":
 		bibleStudy.DisplayBibleStudy(db)
 		case "3":
